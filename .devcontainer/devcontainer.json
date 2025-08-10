@@ -1,21 +1,15 @@
+
 {
-  "name": "SPFx Development",
-  "image": "m365pnp/spfx:latest", // Or a specific SPFx version like m365pnp/spfx:1.18.2
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "lts"
-    }
-  },
-  "forwardPorts": [4321, 35729], // SPFx local workbench and LiveReload ports
-  "postCreateCommand": "npm install -g gulp-cli yo @microsoft/generator-sharepoint && yo @microsoft/sharepoint --skip-install --solution-name my-spfx-project --framework react --webpart-name MyWebPart",
+  "name": "SPFx Dev Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:18",
+  "features": {},
+  "postCreateCommand": "./.devcontainer/spfx-setup.sh",
   "customizations": {
     "vscode": {
       "extensions": [
-        "ms-spfx.spfx-toolkit",
-        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-tslint-plugin",
         "dbaeumer.vscode-eslint"
       ]
     }
-  },
-  "remoteUser": "node" // Or a user defined in the image
+  }
 }
