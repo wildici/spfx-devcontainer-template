@@ -1,18 +1,24 @@
 {
-  "name": "SPFx Dev Container",
-  "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:16.18.1",
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "16.18.1"
-    }
-  },
-  "postCreateCommand": "npm install -g yo@4.3.1 gulp@2.3.0 @microsoft/generator-sharepoint@1.17.2 && .devcontainer/scripts/clone-repo.sh",
+  "name": "SPFx Dev Environment",
+  "dockerFile": "Dockerfile",
+
   "customizations": {
     "vscode": {
       "extensions": [
+        "ms-vscode.vscode-typescript-next",
         "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
-      ]
+        "pnp.polylint",
+        "msjsdiag.debugger-for-chrome"
+      ],
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      }
     }
-  }
+  },
+
+  "postCreateCommand": "npm install -g gulp-cli@2.3.0 yo@4.3.1 @microsoft/generator-sharepoint@1.17.2 spfx-fast-serve@3.0.6 spfx-fast-serve-helpers@~1.17.0",
+
+  "forwardPorts": [5432, 4321],
+
+  "remoteUser": "node"
 }
