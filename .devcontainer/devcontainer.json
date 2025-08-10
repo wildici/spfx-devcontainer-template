@@ -1,30 +1,21 @@
 {
-	"name": "SPFx 1.14.0",
-	"image": "m365pnp/spfx:1.14.0",
-	"settings": {},
-	"extensions": [
-		"editorconfig.editorconfig",
-		"dbaeumer.vscode-eslint",
-    		"eliostruyf.spfx-essentials"
-	],
-	"forwardPorts": [
-		4321,
-		35729
-	],
-	"portsAttributes": {
-		"4321": {
-			"protocol": "https",
-			"label": "Manifest",
-			"onAutoForward": "silent",
-			"requireLocalPort": true
-		},			
-		"35729": {
-			"protocol": "https",
-			"label": "LiveReload",
-			"onAutoForward": "silent",
-			"requireLocalPort": true
-		}
-	},
-	"postCreateCommand": "bash .devcontainer/spfx-setup-env.sh",
-	"remoteUser": "node"
+  "name": "SPFx Development",
+  "image": "m365pnp/spfx:latest", // Or a specific SPFx version like m365pnp/spfx:1.18.2
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "forwardPorts": [4321, 35729], // SPFx local workbench and LiveReload ports
+  "postCreateCommand": "npm install -g gulp-cli yo @microsoft/generator-sharepoint && yo @microsoft/sharepoint --skip-install --solution-name my-spfx-project --framework react --webpart-name MyWebPart",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-spfx.spfx-toolkit",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  },
+  "remoteUser": "node" // Or a user defined in the image
 }
