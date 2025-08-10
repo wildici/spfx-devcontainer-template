@@ -1,24 +1,30 @@
 {
-  "name": "SPFx Dev Environment",
-  "dockerFile": "Dockerfile",
-
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-vscode.vscode-typescript-next",
-        "dbaeumer.vscode-eslint",
-        "pnp.polylint",
-        "msjsdiag.debugger-for-chrome"
-      ],
-      "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-      }
-    }
-  },
-
-  "postCreateCommand": "npm install -g gulp-cli@2.3.0 yo@4.3.1 @microsoft/generator-sharepoint@1.17.2 spfx-fast-serve@3.0.6 spfx-fast-serve-helpers@~1.17.0",
-
-  "forwardPorts": [5432, 4321],
-
-  "remoteUser": "node"
+	"name": "SPFx 1.14.0",
+	"image": "m365pnp/spfx:1.14.0",
+	"settings": {},
+	"extensions": [
+		"editorconfig.editorconfig",
+		"dbaeumer.vscode-eslint",
+    		"eliostruyf.spfx-essentials"
+	],
+	"forwardPorts": [
+		4321,
+		35729
+	],
+	"portsAttributes": {
+		"4321": {
+			"protocol": "https",
+			"label": "Manifest",
+			"onAutoForward": "silent",
+			"requireLocalPort": true
+		},			
+		"35729": {
+			"protocol": "https",
+			"label": "LiveReload",
+			"onAutoForward": "silent",
+			"requireLocalPort": true
+		}
+	},
+	"postCreateCommand": "bash .devcontainer/spfx-setup-env.sh",
+	"remoteUser": "node"
 }
